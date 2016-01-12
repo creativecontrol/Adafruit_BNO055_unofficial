@@ -1,0 +1,7 @@
+{
+    "name": "Adafruit_BNO055_unofficial",
+    "version": "0.0.1",
+    "author": "Thadeus Reed <t@creativecontrol.cc>",
+    "license": "MIT",
+    "description": "Port of Adafruit BNO055 library for 9axis IMU"
+}

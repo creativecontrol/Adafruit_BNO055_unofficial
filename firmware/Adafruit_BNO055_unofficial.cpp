@@ -557,13 +557,8 @@ bool Adafruit_BNO055::isFullyCalibrated(void)
 bool Adafruit_BNO055::write8(adafruit_bno055_reg_t reg, byte value)
 {
   Wire.beginTransmission(_address);
-  #if ARDUINO >= 100
-    Wire.write((uint8_t)reg);
-    Wire.write((uint8_t)value);
-  #else
-    Wire.send(reg);
-    Wire.send(value);
-  #endif
+  Wire.write((uint8_t)reg);
+  Wire.write((uint8_t)value);
   Wire.endTransmission();
 
   /* ToDo: Check for error! */
@@ -580,18 +575,10 @@ byte Adafruit_BNO055::read8(adafruit_bno055_reg_t reg )
   byte value = 0;
 
   Wire.beginTransmission(_address);
-  #if ARDUINO >= 100
-    Wire.write((uint8_t)reg);
-  #else
-    Wire.send(reg);
-  #endif
+  Wire.write((uint8_t)reg);
   Wire.endTransmission();
   Wire.requestFrom(_address, (byte)1);
-  #if ARDUINO >= 100
-    value = Wire.read();
-  #else
-    value = Wire.receive();
-  #endif
+  value = Wire.read();
 
   return value;
 }
@@ -604,21 +591,13 @@ byte Adafruit_BNO055::read8(adafruit_bno055_reg_t reg )
 bool Adafruit_BNO055::readLen(adafruit_bno055_reg_t reg, byte * buffer, uint8_t len)
 {
   Wire.beginTransmission(_address);
-  #if ARDUINO >= 100
-    Wire.write((uint8_t)reg);
-  #else
-    Wire.send(reg);
-  #endif
+  Wire.write((uint8_t)reg);
   Wire.endTransmission();
   Wire.requestFrom(_address, (byte)len);
 
   for (uint8_t i = 0; i < len; i++)
   {
-    #if ARDUINO >= 100
       buffer[i] = Wire.read();
-    #else
-      buffer[i] = Wire.receive();
-    #endif
   }
 
   /* ToDo: Check for errors! */
